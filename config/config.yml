@@ -1,0 +1,56 @@
+# =========================
+# PROJECT
+# =========================
+project:
+  name: engagement-decay-forecasting
+  random_state: 42
+
+# =========================
+# PROBLEM DEFINITION
+# =========================
+problem:
+  type: time_series_forecasting
+  entity_id: user_id
+  time_column: timestamp
+  target_column: engagement_value
+  forecast_horizon: 1   # predict next time step
+
+# =========================
+# DATA
+# =========================
+data:
+  raw_path: data/raw/data.csv
+  processed_path: data/processed/processed.csv
+
+# =========================
+# VALIDATION
+# =========================
+validation:
+  check_monotonic_time: true
+  allow_missing: false
+
+# =========================
+# FEATURE ENGINEERING
+# =========================
+preprocessing:
+  lags: [1, 2, 3, 7]
+  rolling_windows: [3, 7]
+  drop_na: true
+
+# =========================
+# MODEL
+# =========================
+model:
+  name: random_forest_regressor
+  params:
+    n_estimators: 200
+    max_depth: 10
+    random_state: 42
+
+# =========================
+# EVALUATION
+# =========================
+evaluation:
+  metrics:
+    - rmse
+    - mae

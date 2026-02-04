@@ -1,0 +1,19 @@
+version: 1
+
+entities:
+  - name: user
+    join_key: user_id
+    description: Unique identifier for a user/customer
+
+features:
+  - name: user_transaction_count_7d
+    entity: user
+    description: Number of transactions made by the user in the last 7 days
+    source: transactions
+    computation:
+      type: rolling_count
+      window_days: 7
+    dtype: int
+    freshness: batch
+    owner: ml-platform
+    status: active
