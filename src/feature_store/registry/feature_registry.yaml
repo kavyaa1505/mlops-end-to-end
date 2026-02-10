@@ -7,6 +7,7 @@ entities:
 
 features:
   - name: user_transaction_count_7d
+    version: 1
     entity: user
     description: Number of transactions made by the user in the last 7 days
     source: transactions

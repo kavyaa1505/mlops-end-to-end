@@ -26,6 +26,21 @@ def validate_data() -> None:
 
     print("✅ Data validation passed successfully")
 
+def detect_breaking_changes(
+    current_features: set,
+    registry_features: set,
+    allowed_breaks: set
+):
+    removed = registry_features - current_features
+
+    for feature in removed:
+        if feature not in allowed_breaks:
+            raise RuntimeError(
+                f"❌ Breaking change detected: feature removed -> {feature}"
+            )
+
+    return True
+
 
 if __name__ == "__main__":
     validate_data()

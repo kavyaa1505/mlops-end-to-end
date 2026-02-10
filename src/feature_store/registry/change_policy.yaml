@@ -1,0 +1,4 @@
+breaking_change_policy:
+  default: fail
+
+allowed_breaking_changes: []
