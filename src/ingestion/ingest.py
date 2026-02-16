@@ -1,14 +1,19 @@
+from pathlib import Path
 import pandas as pd
 
-def ingest_transactions(path: str) -> pd.DataFrame:
-    """
-    Ingest raw transaction data.
-    This is the ONLY place that reads raw data.
-    """
-    df = pd.read_csv(path)
+def run_ingestion():
+    df = pd.DataFrame({
+        "Amount": [100.5, 250.0, 75.25],
+        "Class": [0, 1, 0]
+    })
 
-    # minimal sanity cleanup
-    df = df.dropna(subset=["CustomerID", "InvoiceDate"])
-    df["InvoiceDate"] = pd.to_datetime(df["InvoiceDate"])
+    BASE_DIR = Path(__file__).resolve().parents[2]
+    output_path = BASE_DIR / "data" / "processed" / "data.csv"
 
-    return df
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(output_path, index=False)
+
+    print(f"Data saved to {output_path}")
+
+if __name__ == "__main__":
+    run_ingestion()
