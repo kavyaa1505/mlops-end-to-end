@@ -7,3 +7,12 @@ __pycache__/
 
 # Data
 data/raw/*.csv
+
+# Packaging artifacts
+*.egg-info/
+dist/
+build/
+
+# Python cache
+__pycache__/
+*.pyc
